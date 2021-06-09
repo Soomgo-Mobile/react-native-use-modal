@@ -1,5 +1,3 @@
-export default {
-  multiply(a: number, b: number) {
-    return Promise.resolve(a * b);
-  },
-};
+export * from './use-modal';
+export * from './modal-provider';
+export * from './create-modal';

@@ -1,18 +1,18 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import UseModal from 'react-native-use-modal';
+// import UseModal from 'react-native-use-modal';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  // const [result, setResult] = React.useState<number | undefined>();
 
-  React.useEffect(() => {
-    UseModal.multiply(3, 7).then(setResult);
-  }, []);
+  // React.useEffect(() => {
+  //   UseModal.multiply(3, 7).then(setResult);
+  // }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>Result: </Text>
     </View>
   );
 }

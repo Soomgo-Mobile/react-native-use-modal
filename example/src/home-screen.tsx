@@ -1,7 +1,7 @@
-import { Button, StyleSheet, View } from 'react-native';
+import {Button, StyleSheet, View} from 'react-native';
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import type { RootStackNavigationProp } from './App';
+import {useNavigation} from '@react-navigation/native';
+import type {RootStackNavigationProp} from './App';
 
 export const HomeScreen = () => {
   const navigation = useNavigation<RootStackNavigationProp>();

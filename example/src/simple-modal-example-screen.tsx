@@ -1,7 +1,7 @@
-import { Button, StyleSheet, View } from 'react-native';
-import React, { useCallback } from 'react';
-import { useSimpleModal } from './simple-modal';
-import { ModalResultType } from '../../src/modal-result-type';
+import {Button, StyleSheet, View} from 'react-native';
+import React, {useCallback} from 'react';
+import {useSimpleModal} from './simple-modal';
+import {ModalResultType} from '../../src/modal-result-type';
 
 export const SimpleModalExampleScreen = () => {
   const simpleModal = useSimpleModal();

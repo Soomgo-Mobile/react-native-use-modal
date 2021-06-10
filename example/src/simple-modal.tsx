@@ -1,8 +1,8 @@
-import { createModal, useModal } from 'react-native-use-modal';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import {createModal, useModal} from 'react-native-use-modal';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-export const SimpleModal = createModal(({ confirm, cancel }) => {
+export const SimpleModal = createModal(({confirm, cancel}) => {
   return (
     <View style={styles.container}>
       <Text>Title of modal</Text>

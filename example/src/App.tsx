@@ -5,8 +5,8 @@ import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import {SimpleModalExampleScreen} from './simple-modal-example-screen';
 import {HomeScreen} from './home-screen';
+import {SimpleModalExampleScreen} from './simple-modal-example';
 
 type RootStackParamList = {
   'simple-modal-example': undefined;

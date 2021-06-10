@@ -13,7 +13,7 @@ import _ from 'lodash';
 
 const isNameValid = (value: string) => value.length > 2;
 
-const ModalWithInput = createModal<string>(({confirm, cancel}) => {
+const TextInputModal = createModal<string>(({confirm, cancel}) => {
   const [name, setName] = useState('');
 
   const [errorMessage, setErrorMessage] = useState('');
@@ -63,5 +63,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export const useModalWithInput = () =>
-  useModal<typeof ModalWithInput>(<ModalWithInput />);
+export const useTextInputModal = () =>
+  useModal<typeof TextInputModal>(<TextInputModal />);

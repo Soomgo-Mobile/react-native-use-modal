@@ -14,7 +14,7 @@ import { nanoid } from 'nanoid';
 import type { ForwardedRef } from './util/forwarde-ref';
 import { isNotNil } from './util/is-not-nil';
 
-type ModalRef = RefAttributes<ModalInstance<any>>;
+type ModalRef = RefAttributes<ModalInstance<any, any>>;
 
 /**
  * 모달을 등록하는 hook
@@ -27,10 +27,9 @@ export const useModal = <
   const context = useContext(ModalContext);
   // 모달 ID
   const modalId = useMemo(() => nanoid(), []);
-  console.log('modalId', modalId);
 
   const [instance$] = useState(
-    () => new BehaviorSubject<ModalInstance<any> | null>(null)
+    () => new BehaviorSubject<ModalInstance<any, any> | null>(null)
   );
 
   useEffect(() => {
@@ -40,8 +39,6 @@ export const useModal = <
       },
     });
     context.set(modalId, clone);
-    console.log('context', context);
-    console.log('modal set', modalId, clone);
 
     return () => {
       context.delete(modalId);
@@ -49,7 +46,8 @@ export const useModal = <
   }, [context, instance$, modal, modalId]);
 
   const show = useCallback<ForwardedRef<Component>['show']>(
-    async () => (await firstValueFrom(instance$.pipe(filter(isNotNil)))).show(),
+    async (param) =>
+      (await firstValueFrom(instance$.pipe(filter(isNotNil)))).show(param),
     [instance$]
   );
 

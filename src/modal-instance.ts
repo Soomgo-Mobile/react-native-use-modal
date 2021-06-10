@@ -1,5 +1,7 @@
 import type { ModalResult } from './modal-result';
 
-export interface ModalInstance<T> {
-  show: () => Promise<ModalResult<T>>;
+export interface ModalInstance<Data = void, Param = void> {
+  show: Param extends void
+    ? () => Promise<ModalResult<Data>>
+    : (param: Param) => Promise<ModalResult<Data>>;
 }

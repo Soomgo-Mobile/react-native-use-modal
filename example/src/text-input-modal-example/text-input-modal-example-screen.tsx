@@ -2,10 +2,10 @@ import React, {useCallback, useState} from 'react';
 import {ModalResultType} from 'react-native-use-modal';
 import {Button, StyleSheet, View} from 'react-native';
 import {Paragraph, Title} from 'react-native-paper';
-import {useModalWithInput} from './modal-with-input';
+import {useTextInputModal} from './text-input-modal';
 
-export const ModalWithInputExampleScreen = () => {
-  const modalWithInput = useModalWithInput();
+export const TextInputModalExampleScreen = () => {
+  const modalWithInput = useTextInputModal();
 
   const [modalResultText, setModalResultText] = useState('not yet');
 

@@ -7,12 +7,14 @@ import {
 } from '@react-navigation/stack';
 import {HomeScreen} from './home-screen';
 import {SimpleModalExampleScreen} from './simple-modal-example';
-import {ModalWithInputExampleScreen} from './modal-with-input-example';
+import {TextInputModalExampleScreen} from './text-input-modal-example';
+import {AlertModalExampleScreen} from './alert-modal-example';
 
 type RootStackParamList = {
   SIMPLE_MODAL_EXAMPLE: undefined;
   HOME: undefined;
-  MODAL_WITH_INPUT_EXAMPLE: undefined;
+  TEXT_INPUT_MODAL_EXAMPLE: undefined;
+  ALERT_MODAL_EXAMPLE: undefined;
 };
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
@@ -30,8 +32,12 @@ export default function App() {
             component={SimpleModalExampleScreen}
           />
           <Stack.Screen
-            name={'MODAL_WITH_INPUT_EXAMPLE'}
-            component={ModalWithInputExampleScreen}
+            name={'TEXT_INPUT_MODAL_EXAMPLE'}
+            component={TextInputModalExampleScreen}
+          />
+          <Stack.Screen
+            name={'ALERT_MODAL_EXAMPLE'}
+            component={AlertModalExampleScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

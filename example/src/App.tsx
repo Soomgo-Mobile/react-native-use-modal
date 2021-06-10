@@ -1,16 +1,20 @@
 import * as React from 'react';
-import { ModalProvider } from 'react-native-use-modal';
-import { NavigationContainer } from '@react-navigation/native';
+import {ModalProvider} from 'react-native-use-modal';
+import {NavigationContainer} from '@react-navigation/native';
 import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { SimpleModalExampleScreen } from './simple-modal-example-screen';
-import { HomeScreen } from './home-screen';
+import {HomeScreen} from './home-screen';
+import {SimpleModalExampleScreen} from './simple-modal-example';
+import {TextInputModalExampleScreen} from './text-input-modal-example';
+import {AlertModalExampleScreen} from './alert-modal-example';
 
 type RootStackParamList = {
-  'simple-modal-example': undefined;
-  'home': undefined;
+  SIMPLE_MODAL_EXAMPLE: undefined;
+  HOME: undefined;
+  TEXT_INPUT_MODAL_EXAMPLE: undefined;
+  ALERT_MODAL_EXAMPLE: undefined;
 };
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
@@ -21,11 +25,19 @@ export default function App() {
   return (
     <ModalProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={'home'}>
-          <Stack.Screen name={'home'} component={HomeScreen} />
+        <Stack.Navigator initialRouteName={'HOME'}>
+          <Stack.Screen name={'HOME'} component={HomeScreen} />
           <Stack.Screen
-            name={'simple-modal-example'}
+            name={'SIMPLE_MODAL_EXAMPLE'}
             component={SimpleModalExampleScreen}
+          />
+          <Stack.Screen
+            name={'TEXT_INPUT_MODAL_EXAMPLE'}
+            component={TextInputModalExampleScreen}
+          />
+          <Stack.Screen
+            name={'ALERT_MODAL_EXAMPLE'}
+            component={AlertModalExampleScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

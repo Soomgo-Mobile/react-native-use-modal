@@ -1,6 +1,7 @@
 import {
   MutableRefObject,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useState,
@@ -12,12 +13,15 @@ import type { ModalResult } from './modal-result';
 import type { ModalConfirmFunction } from './modal-confirm-function';
 import { ModalResultType } from './modal-result-type';
 
+type ModalVisibility = 'HIDDEN' | 'SHOWN';
+
 export const useModalViewModel = <
-  T extends unknown = void // 모달 결과로 받을 값의 타입
+  Data extends unknown = void, // 모달 결과로 받을 값의 타입
+  Param extends unknown = void
 >(
   ref:
-    | ((instance: ModalInstance<T> | null) => void)
-    | MutableRefObject<ModalInstance<T> | null>
+    | ((instance: ModalInstance<Data, Param> | null) => void)
+    | MutableRefObject<ModalInstance<Data, Param> | null>
     | null,
   {
     cancelOnBackButtonPress = false,
@@ -30,23 +34,37 @@ export const useModalViewModel = <
   // desired 표시 상태 (이 값이 true 라고 해서 모달이 표시된 상태는 아닙니다. false 도 마찬가지)
   const [desiredVisibility, setDesiredVisibility] = useState(false);
   // AlertResult Subject
-  const [result$] = useState(() => new Subject<ModalResult<T>>());
+  const [result$] = useState(() => new Subject<ModalResult<Data>>());
   // 보여짐/숨겨짐 상태
   const [visibility$] = useState(
-    () => new BehaviorSubject<'HIDDEN' | 'SHOWN'>('HIDDEN')
+    () => new BehaviorSubject<ModalVisibility>('HIDDEN')
+  );
+  const [param, setParam] = useState<Param>();
+  const [visibility, setVisibility] = useState<ModalVisibility>(
+    visibility$.value
   );
 
+  useEffect(() => {
+    const subscription = visibility$.subscribe((value) => {
+      setVisibility(value);
+    });
+    return () => subscription.unsubscribe();
+  }, [visibility$]);
+
   useImperativeHandle(ref, () => ({
-    show: () => {
+    // @ts-ignore
+    show: (_param: Param) => {
+      setParam(_param);
       // 모달 표시 상태로 변경 시작
       setDesiredVisibility(true);
+      visibility$.next('SHOWN');
       // 모달 결과 Subject 에서
       return firstValueFrom(result$);
     },
   }));
 
   // 모달 종료 (승인)
-  const confirm = useCallback<ModalConfirmFunction<T>>(
+  const confirm = useCallback<ModalConfirmFunction<Data>>(
     // @ts-ignore
     (data) => {
       // 숨김 상태로 변경 시작
@@ -114,15 +132,19 @@ export const useModalViewModel = <
       handleBackdropPress,
       handleModalShown,
       handleModalHidden,
+      param,
+      visibility,
     }),
     [
-      cancel,
       confirm,
+      cancel,
+      desiredVisibility,
       handleBackButtonPress,
       handleBackdropPress,
-      handleModalHidden,
       handleModalShown,
-      desiredVisibility,
+      handleModalHidden,
+      param,
+      visibility,
     ]
   );
 };

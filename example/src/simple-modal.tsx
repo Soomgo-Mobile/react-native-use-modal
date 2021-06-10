@@ -1,21 +1,26 @@
 import {createModal, useModal} from 'react-native-use-modal';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {Button} from 'react-native-paper';
 
 export const SimpleModal = createModal(({confirm, cancel}) => {
   return (
     <View style={styles.container}>
       <Text>Title of modal</Text>
       <Text>Content of modal</Text>
-      <Button title={'Ok'} onPress={confirm} />
-      <Button title={'Cancel'} onPress={cancel} />
+      <Button onPress={confirm}>Ok</Button>
+      <Button onPress={cancel}>Cancel</Button>
     </View>
   );
 });
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    backgroundColor: '#fff',
+    margin: 16,
+  },
+  button: {
+    margin: 16,
   },
 });
 

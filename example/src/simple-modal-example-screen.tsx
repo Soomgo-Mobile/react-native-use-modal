@@ -1,7 +1,7 @@
 import {Button, StyleSheet, View} from 'react-native';
 import React, {useCallback} from 'react';
 import {useSimpleModal} from './simple-modal';
-import {ModalResultType} from '../../src/modal-result-type';
+import {ModalResultType} from 'react-native-use-modal';
 
 export const SimpleModalExampleScreen = () => {
   const simpleModal = useSimpleModal();
@@ -24,6 +24,7 @@ export const SimpleModalExampleScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

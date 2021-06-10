@@ -46,9 +46,6 @@ export const createModal = <
         onBackButtonPress={handleBackButtonPress}
         onModalHide={handleModalHidden}
         onModalWillShow={handleModalShown}
-        animationIn={'fadeIn'}
-        animationOut={'fadeOut'}
-        // useNativeDriver={true}
         style={styles.modal}
       >
         <Content confirm={confirm} cancel={cancel} />

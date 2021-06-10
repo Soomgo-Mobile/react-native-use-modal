@@ -1,28 +1,28 @@
-import {Button, StyleSheet, View} from 'react-native';
 import React, {useCallback, useState} from 'react';
-import {useSimpleModal} from './simple-modal';
 import {ModalResultType} from 'react-native-use-modal';
+import {Button, StyleSheet, View} from 'react-native';
 import {Paragraph, Title} from 'react-native-paper';
+import {useModalWithInput} from './modal-with-input';
 
-export const SimpleModalExampleScreen = () => {
-  const simpleModal = useSimpleModal();
+export const ModalWithInputExampleScreen = () => {
+  const modalWithInput = useModalWithInput();
 
   const [modalResultText, setModalResultText] = useState('not yet');
 
   const handlePress = useCallback(async () => {
-    const result = await simpleModal.show();
+    const result = await modalWithInput.show();
     if (result.type === ModalResultType.CONFIRM) {
       // modal finished by confirm action
-      setModalResultText('User confirmed.');
+      setModalResultText('Your name is: ' + result.data);
     } else {
       // modal finished by cancel action
-      setModalResultText('User canceled.');
+      setModalResultText('User canceled name entry.');
     }
-  }, [simpleModal]);
+  }, [modalWithInput]);
 
   return (
     <View style={styles.container}>
-      <Title>Last modal result</Title>
+      <Title>Result</Title>
       <Paragraph>{modalResultText}</Paragraph>
       <View style={styles.space} />
       <Button title={'show'} onPress={handlePress} />

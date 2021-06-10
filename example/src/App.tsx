@@ -7,10 +7,12 @@ import {
 } from '@react-navigation/stack';
 import {HomeScreen} from './home-screen';
 import {SimpleModalExampleScreen} from './simple-modal-example';
+import {ModalWithInputExampleScreen} from './modal-with-input-example';
 
 type RootStackParamList = {
-  'simple-modal-example': undefined;
-  home: undefined;
+  SIMPLE_MODAL_EXAMPLE: undefined;
+  HOME: undefined;
+  MODAL_WITH_INPUT_EXAMPLE: undefined;
 };
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
@@ -21,11 +23,15 @@ export default function App() {
   return (
     <ModalProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={'home'}>
-          <Stack.Screen name={'home'} component={HomeScreen} />
+        <Stack.Navigator initialRouteName={'HOME'}>
+          <Stack.Screen name={'HOME'} component={HomeScreen} />
           <Stack.Screen
-            name={'simple-modal-example'}
+            name={'SIMPLE_MODAL_EXAMPLE'}
             component={SimpleModalExampleScreen}
+          />
+          <Stack.Screen
+            name={'MODAL_WITH_INPUT_EXAMPLE'}
+            component={ModalWithInputExampleScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -9,9 +9,15 @@ export const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Button
-        title={'show'}
+        title={'Simple modal example'}
         onPress={() => {
-          navigation.push('simple-modal-example');
+          navigation.push('SIMPLE_MODAL_EXAMPLE');
+        }}
+      />
+      <Button
+        title={'Modal with input example'}
+        onPress={() => {
+          navigation.push('MODAL_WITH_INPUT_EXAMPLE');
         }}
       />
     </View>

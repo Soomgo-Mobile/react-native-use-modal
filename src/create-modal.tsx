@@ -48,7 +48,7 @@ export const createModal = <
         onModalWillShow={handleModalShown}
         animationIn={'fadeIn'}
         animationOut={'fadeOut'}
-        backdropOpacity={0.4}
+        // useNativeDriver={true}
         style={styles.modal}
       >
         <Content confirm={confirm} cancel={cancel} />

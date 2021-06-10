@@ -27,6 +27,7 @@ export const useModal = <
   const context = useContext(ModalContext);
   // 모달 ID
   const modalId = useMemo(() => nanoid(), []);
+  console.log('modalId', modalId);
 
   const [instance$] = useState(
     () => new BehaviorSubject<ModalInstance<any> | null>(null)
@@ -39,6 +40,8 @@ export const useModal = <
       },
     });
     context.set(modalId, clone);
+    console.log('context', context);
+    console.log('modal set', modalId, clone);
 
     return () => {
       context.delete(modalId);

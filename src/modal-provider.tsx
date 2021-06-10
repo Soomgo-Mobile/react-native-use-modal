@@ -11,6 +11,7 @@ export const ModalProvider: React.FC = ({ children }) => {
     return {
       // 모달 추가/업데이트
       set: (id, node) => {
+        console.log('ModalProvider', 'set', id, node);
         // ID에 입력받은 노드 매핑
         setModalMap((prevState) => new Map(prevState).set(id, node));
       },
@@ -32,12 +33,13 @@ export const ModalProvider: React.FC = ({ children }) => {
       .map(([key, modal]) => <View key={key}>{modal}</View>);
   }, [modalMap]);
 
+  console.log('modalList', modalList);
+  console.log('modalMap', modalMap);
+
   return (
     <ModalContext.Provider value={modalContext}>
-      <>
-        {children}
-        {modalList}
-      </>
+      {children}
+      {modalList}
     </ModalContext.Provider>
   );
 };

@@ -19,7 +19,7 @@ export type CreateModalFunctionParam<
   option?: {
     cancelOnBackdropPress?: boolean; // 배경 클릭시 취소 여부
     cancelOnBackButtonPress?: boolean; // 뒤로가기 버튼 클릭시 취소 여부
-    modalProps?: Partial<ModalProps>;
+    modalProps?: Omit<Partial<ModalProps>, 'isVisible'>;
   }
 ];
 
@@ -56,8 +56,6 @@ export const createModal = <
     });
 
     const {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      isVisible,
       backdropTransitionOutTiming,
       onBackdropPress,
       onBackButtonPress,

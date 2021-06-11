@@ -110,14 +110,18 @@ const handlePressButton = async () => {
 
 We sometimes need parameters to configure the modal.
 
+`createUseModal` receives two generic types, the first is the type of data to be included in the result of modal, and the second is the type of parameter passed when calling modal.
+
+If not used, just declare it as void type. The default is void.
+
 ```tsx
 // useAlertModal.tsx
 import {createUseModal} from 'react-native-use-modal';
 
 const useAlertModal = createUseModal<
-  void,
-  {title: string; message: string} // Declare parameters type
-  >(({confirm, cancel, param}) => {
+  void, // Result data type. In this case it is not used, so it is void.
+  {title: string; message: string} // Parameters type
+  >(({confirm, cancel, param}) => { // Parameters are passed in props
   return (
     <View>
       <Title>{param.title}</Title>
@@ -154,6 +158,8 @@ const BarView = () => {
 
 Sometimes we may want to return a result from Modal.
 ```tsx
+// Pass the result data type as the first Generic argument.
+// In this case, no parameters are used, so the second generic argument does not need to be passed.
 export const useTextInputModal = createUseModal<string>(({confirm, cancel}) => {
   const [value, setValue] = useState('');
 

@@ -160,6 +160,7 @@ Sometimes we may want to return a result from Modal.
 ```tsx
 // Pass the result data type as the first Generic argument.
 // In this case, no parameters are used, so the second generic argument does not need to be passed.
+// Now, the confirm function passed as props receives the value of the data type declared as generic.
 export const useTextInputModal = createUseModal<string>(({confirm, cancel}) => {
   const [value, setValue] = useState('');
 

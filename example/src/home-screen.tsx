@@ -10,21 +10,27 @@ export const HomeScreen = () => {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         <Button
-          title={'Simple modal example'}
+          title={'Simple modal'}
           onPress={() => {
             navigation.push('SIMPLE_MODAL_EXAMPLE');
           }}
         />
         <Button
-          title={'Text input modal example'}
+          title={'Text input modal'}
           onPress={() => {
             navigation.push('TEXT_INPUT_MODAL_EXAMPLE');
           }}
         />
         <Button
-          title={'Alert modal example'}
+          title={'Alert modal'}
           onPress={() => {
             navigation.push('ALERT_MODAL_EXAMPLE');
+          }}
+        />
+        <Button
+          title={'Show modal continuously'}
+          onPress={() => {
+            navigation.push('SHOW_MODAL_CONTINUOUSLY_EXAMPLE');
           }}
         />
       </ScrollView>

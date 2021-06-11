@@ -9,12 +9,14 @@ import {HomeScreen} from './home-screen';
 import {SimpleModalExampleScreen} from './simple-modal-example';
 import {TextInputModalExampleScreen} from './text-input-modal-example';
 import {AlertModalExampleScreen} from './alert-modal-example';
+import {ShowModalContinuouslyExampleScreen} from './show-modal-continuously-example';
 
 type RootStackParamList = {
   SIMPLE_MODAL_EXAMPLE: undefined;
   HOME: undefined;
   TEXT_INPUT_MODAL_EXAMPLE: undefined;
   ALERT_MODAL_EXAMPLE: undefined;
+  SHOW_MODAL_CONTINUOUSLY_EXAMPLE: undefined;
 };
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
@@ -38,6 +40,10 @@ export default function App() {
           <Stack.Screen
             name={'ALERT_MODAL_EXAMPLE'}
             component={AlertModalExampleScreen}
+          />
+          <Stack.Screen
+            name={'SHOW_MODAL_CONTINUOUSLY_EXAMPLE'}
+            component={ShowModalContinuouslyExampleScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

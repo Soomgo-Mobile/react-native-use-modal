@@ -233,6 +233,17 @@ export const useSimpleModal = createUseModal(
 
 ## Workflow example
 
+You can clone this project and test examples by running the following command:
+
+```shell
+# iOS
+yarn && yarn example ios
+# Android
+yarn && yarn example android
+```
+
+Examples provided are:
+
 - [Alert modal](example/src/alert-modal-example)
 - [Simple modal](example/src/simple-modal-example)
 - [Text input modal](example/src/text-input-modal-example)

@@ -6,6 +6,23 @@ import { useModalViewModel } from './use-modal-view-model';
 import { StyleSheet } from 'react-native';
 import type { ModalInstance } from './modal-instance';
 
+export type CreateModalFunctionParam<
+  Data extends unknown = void, // 모달 결과로 받을 값의 타입
+  Param extends unknown = void
+> = [
+  // 모달 내용 컴포넌트
+  Content: React.VoidFunctionComponent<{
+    confirm: ModalConfirmFunction<Data>; // 모달 종료 함수 (승인)
+    cancel: () => void; // 모달 종료 함수 (취소)
+    param: Param;
+  }>,
+  option?: {
+    cancelOnBackdropPress?: boolean; // 배경 클릭시 취소 여부
+    cancelOnBackButtonPress?: boolean; // 뒤로가기 버튼 클릭시 취소 여부
+    modalProps?: Partial<ModalProps>;
+  }
+];
+
 /**
  * 모달 컴포넌트 생성 함수
  */
@@ -13,21 +30,14 @@ export const createModal = <
   Data extends unknown = void, // 모달 결과로 받을 값의 타입
   Param extends unknown = void
 >(
-  // 모달 내용 컴포넌트
-  Content: React.VoidFunctionComponent<{
-    confirm: ModalConfirmFunction<Data>; // 모달 종료 함수 (승인)
-    cancel: () => void; // 모달 종료 함수 (취소)
-    param: Param;
-  }>,
-  {
-    cancelOnBackButtonPress = false,
-    cancelOnBackdropPress = false,
-    modalProps = {},
-  }: {
-    cancelOnBackdropPress?: boolean; // 배경 클릭시 취소 여부
-    cancelOnBackButtonPress?: boolean; // 뒤로가기 버튼 클릭시 취소 여부
-    modalProps?: Partial<ModalProps>;
-  } = {}
+  ...[
+    Content,
+    {
+      cancelOnBackButtonPress = false,
+      cancelOnBackdropPress = false,
+      modalProps = {},
+    } = {},
+  ]: CreateModalFunctionParam<Data, Param>
 ) =>
   React.forwardRef<ModalInstance<Data, Param>>((_, ref) => {
     const {

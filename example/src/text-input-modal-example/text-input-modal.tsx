@@ -1,19 +1,19 @@
-import {createModal, useModal} from 'react-native-use-modal';
 import {
   Button,
-  Paragraph,
-  Title,
-  TextInput,
   HelperText,
+  Paragraph,
+  TextInput,
+  Title,
 } from 'react-native-paper';
 import {StyleSheet, View} from 'react-native';
 import React, {useCallback, useState} from 'react';
 import {Space} from '../view';
 import _ from 'lodash';
+import {createUseModal} from '../../../src/create-use-modal';
 
 const isNameValid = (value: string) => value.length > 2;
 
-const TextInputModal = createModal<string>(({confirm, cancel}) => {
+export const useTextInputModal = createUseModal<string>(({confirm, cancel}) => {
   const [name, setName] = useState('');
 
   const [errorMessage, setErrorMessage] = useState('');
@@ -62,6 +62,3 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
 });
-
-export const useTextInputModal = () =>
-  useModal<typeof TextInputModal>(<TextInputModal />);

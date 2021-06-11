@@ -1,9 +1,9 @@
-import {createModal, useModal} from 'react-native-use-modal';
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Button, Paragraph, Title} from 'react-native-paper';
+import {createUseModal} from '../../../src/create-use-modal';
 
-export const SimpleModal = createModal(({confirm, cancel}) => {
+export const useSimpleModal = createUseModal(({confirm, cancel}) => {
   return (
     <View style={styles.container}>
       <Title>Title of modal</Title>
@@ -37,6 +37,3 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
 });
-
-export const useSimpleModal = () =>
-  useModal<typeof SimpleModal>(<SimpleModal />);

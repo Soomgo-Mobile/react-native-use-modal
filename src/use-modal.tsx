@@ -10,9 +10,9 @@ import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { ModalContext } from './modal-context';
 import type { ModalInstance } from './modal-instance';
-import { nanoid } from 'nanoid';
 import type { ForwardedRef } from './util/forwarde-ref';
 import { isNotNil } from './util/is-not-nil';
+import { ModalIdGenerator } from './modal-id-generator';
 
 type ModalRef = RefAttributes<ModalInstance<any, any>>;
 
@@ -26,7 +26,10 @@ export const useModal = <
 ) => {
   const context = useContext(ModalContext);
   // 모달 ID
-  const modalId = useMemo(() => nanoid(), []);
+  const modalId = useMemo(
+    () => String(ModalIdGenerator.getInstance().generate()),
+    []
+  );
 
   const [instance$] = useState(
     () => new BehaviorSubject<ModalInstance<any, any> | null>(null)

@@ -1,16 +1,16 @@
 # react-native-use-modal
 
-Way to encapsulation your modal and get result by promise
+Way to encapsulate your modal and get result by promise
 
 ## Feature
 
-- show modal and get result as promise
-- easy to show multiple modal continuously
-- pass parameters to modal when call `show`
-- get result data from modal when hide (as promise)
-- encapsulation modal component
-- no need to explicitly place modal at component tree
-- fully customizable
+- Show modal and get result as promise
+- Easy to show multiple modal continuously
+- Pass parameters to modal when call `show`
+- Get result data from modal when hide (as promise)
+- modal encapsulation
+- No need to explicitly place modal at component tree
+- Fully customizable
 
 ## Installation
 
@@ -71,7 +71,7 @@ const FooView = () => {
 };
 ```
 
-### Handles the modal's result
+### Handling the modal's result
 
 You can wait for modal to return the result with await
 
@@ -159,7 +159,7 @@ export const useTextInputModal = createUseModal<string>(({confirm, cancel}) => {
 });
 ```
 
-### Handles the modal's result with value
+### Handling the modal's result with value
 ```tsx
 // BazView.tsx
 const BazView = () => {
@@ -179,6 +179,41 @@ const BazView = () => {
     }
   };
 };
+```
+
+### Customize modal config
+This package depends on `react-native-modal` and accept all its props.
+You can set this in the second argument of the `createUseModal`.
+For example, an animation could be set up like this:
+
+```tsx
+export const useSimpleModal = createUseModal(
+  ({confirm, cancel}) => {
+    /* render here */
+  },
+  {
+    modalProps: {
+      animationIn: 'fadeIn',
+      animationOut: 'fadeOut',
+    },
+  },
+);
+```
+`createUseModal` supports all props, except for the `isVisible` property. We internally manage this property.
+
+### Make cancelable when press backdrop or back button
+With these option, modal will cancel when press backdrop or back button.
+Each option can be set independently.
+```tsx
+export const useSimpleModal = createUseModal(
+  ({confirm, cancel}) => {
+    /* render here */
+  },
+  {
+    cancelOnBackButtonPress: true, // Default is false
+    cancelOnBackdropPress: true, // Default is false
+  },
+);
 ```
 
 ## Workflow example

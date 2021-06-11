@@ -2,7 +2,7 @@ import {Button, Paragraph, Title} from 'react-native-paper';
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Space} from '../view';
-import {createUseModal} from '../../../src/create-use-modal';
+import {createUseModal} from 'react-native-use-modal';
 
 export const useAlertModal = createUseModal<
   void,

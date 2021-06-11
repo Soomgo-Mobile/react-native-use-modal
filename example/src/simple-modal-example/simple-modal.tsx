@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Button, Paragraph, Title} from 'react-native-paper';
-import {createUseModal} from '../../../src/create-use-modal';
+import {createUseModal} from 'react-native-use-modal';
 
 export const useSimpleModal = createUseModal(({confirm, cancel}) => {
   return (

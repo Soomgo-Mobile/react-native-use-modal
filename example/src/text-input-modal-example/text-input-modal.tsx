@@ -9,7 +9,7 @@ import {StyleSheet, View} from 'react-native';
 import React, {useCallback, useState} from 'react';
 import {Space} from '../view';
 import _ from 'lodash';
-import {createUseModal} from '../../../src/create-use-modal';
+import {createUseModal} from 'react-native-use-modal';
 
 const isNameValid = (value: string) => value.length > 2;
 

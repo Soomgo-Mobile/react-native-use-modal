@@ -1,6 +1,6 @@
 {
   "name": "react-native-use-modal",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "hooks for the react native modal",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

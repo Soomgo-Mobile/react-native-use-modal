@@ -1,5 +1,8 @@
 # react-native-use-modal
 
+---
+![npm](https://img.shields.io/npm/v/react-native-use-modal?color=brightgreen)
+
 Way to encapsulate your modal and get result by promise
 
 ## Feature

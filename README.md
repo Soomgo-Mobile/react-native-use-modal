@@ -39,17 +39,29 @@ const App = () => {
 
 ### Declare modal as hook with `createUseModal`
 
+`createUseModal` function receives a functional component of the specified type as the first argument.
+This component will later be displayed as a modal.
+
 ```tsx
 // useSimpleModal.tsx
 import {createUseModal} from 'react-native-use-modal';
 
-const useSimpleModal = createUseModal(({confirm, cancel}) => {
-  return <View>
-    /* any view to presentation */
-    <Button onPress={confirm}>Ok</Button>
-    <Button onPress={cancel}>Cancel</Button>
-  </View>;
-});
+// createUseModal creates a hook and returns it.
+const useSimpleModal = createUseModal(
+  ({
+    confirm, // Call this function to finish (confirm) modal
+    cancel, // Call this function to finish (cancel) modal
+  }) => {
+    // return react node to show as modal
+    return (
+      <View>
+        /* any view to presentation */
+        <Button onPress={confirm}>Ok</Button>
+        <Button onPress={cancel}>Cancel</Button>
+      </View>
+    );
+  },
+);
 ```
 
 ### Show modal using hook
@@ -61,6 +73,7 @@ const useSimpleModal = createUseModal(({confirm, cancel}) => {
 
 const FooView = () => {
   // Call the hook you declared earlier
+  // By calling the hook created with createUseModal, you can get an object that can display modal.
   const simpleModal = useSimpleModal();
 
   const handlePressButton = () => {

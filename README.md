@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/react-native-use-modal?color=brightgreen)](https://www.npmjs.com/package/react-native-use-modal)
 [![npm](https://img.shields.io/npm/dw/react-native-use-modal)](https://www.npmjs.com/package/react-native-use-modal)
 
-A way to create a modal that is easy to reuse, easy to encapsulate, and returns the result as a Promise.
+A way to create a modal that is easy to reuse, easy to encapsulate, and returns the result as a promise.
 
 The goal of `react-native-use-modal` is to make all the functions of `react-native-modal` available and convenient to use at the same time.
 
@@ -37,6 +37,27 @@ const App = () => {
   return <ModalProvider>
     // ...
   </ModalProvider>;
+};
+```
+
+If you are already using a different provider, make the `ModalProvider` a child of the other provider.
+Otherwise, the modal will not get the values broadcast by other providers.
+
+```tsx
+import {Provider} from 'react-redux';
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <FooProvider>
+        <BarProvider>
+          <ModalProvider>
+            // ...
+          </ModalProvider>
+        </BarProvider>
+      </BarProvider>
+    </Provider>
+  );
 };
 ```
 

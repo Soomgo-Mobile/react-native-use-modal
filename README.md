@@ -3,7 +3,9 @@
 [![npm](https://img.shields.io/npm/v/react-native-use-modal?color=brightgreen)](https://www.npmjs.com/package/react-native-use-modal)
 [![npm](https://img.shields.io/npm/dw/react-native-use-modal)](https://www.npmjs.com/package/react-native-use-modal)
 
-Way to encapsulate your modal and get result by promise
+A way to create a modal that is easy to reuse, easy to encapsulate, and returns the result as a Promise.
+
+The goal of `react-native-use-modal` is to make all the functions of `react-native-modal` available and convenient to use at the same time.
 
 ## Feature
 

@@ -1,3 +1,4 @@
+import type React from 'react';
 import type { ComponentPropsWithRef } from 'react';
 
 export type ForwardedRef<

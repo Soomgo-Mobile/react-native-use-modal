@@ -9,5 +9,6 @@ export const createUseModal = <
   ...param: CreateModalFunctionParam<Data, Param>
 ) => {
   const Modal = createModal<Data, Param>(...param);
-  return () => useModal<typeof Modal>(<Modal />);
+  const modalElement = <Modal />;
+  return () => useModal<typeof Modal>(modalElement);
 };

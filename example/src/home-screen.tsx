@@ -33,6 +33,12 @@ export const HomeScreen = () => {
             navigation.push('SHOW_MODAL_CONTINUOUSLY_EXAMPLE');
           }}
         />
+        <Button
+          title={'An example of converting an existing modal into a hook'}
+          onPress={() => {
+            navigation.push('FORWARDED_ALERT_MODAL_EXAMPLE');
+          }}
+        />
       </ScrollView>
     </View>
   );

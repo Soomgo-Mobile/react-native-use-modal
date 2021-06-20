@@ -6,16 +6,17 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { BehaviorSubject, firstValueFrom, Subject } from 'rxjs';
-import { filter, first } from 'rxjs/operators';
+import { BehaviorSubject, EMPTY, firstValueFrom, Subject } from 'rxjs';
+import { filter, first, switchMap, tap } from 'rxjs/operators';
 import type { ModalInstance } from './modal-instance';
 import type { ModalResult } from './modal-result';
 import type { ModalConfirmFunction } from './modal-confirm-function';
 import { ModalResultType } from './modal-result-type';
+import { Event } from './event';
 
 type ModalVisibility = 'HIDDEN' | 'SHOWN';
 
-export const useModalViewModel = <
+export const useForwardedModalViewModel = <
   Data extends unknown = void, // 모달 결과로 받을 값의 타입
   Param extends unknown = void
 >(
@@ -24,31 +25,56 @@ export const useModalViewModel = <
     | MutableRefObject<ModalInstance<Data, Param> | null>
     | null,
   {
-    cancelOnBackButtonPress = false,
-    cancelOnBackdropPress = false,
+    handleHide,
   }: {
-    cancelOnBackdropPress?: boolean; // 배경 클릭시 취소 여부
-    cancelOnBackButtonPress?: boolean; // 뒤로가기 버튼 클릭시 취소 여부
-  } = {}
+    handleHide: boolean;
+  }
 ) => {
   // desired 표시 상태 (이 값이 true 라고 해서 모달이 표시된 상태는 아닙니다. false 도 마찬가지)
   const [desiredVisibility, setDesiredVisibility] = useState(false);
+
   // AlertResult Subject
   const [result$] = useState(() => new Subject<ModalResult<Data>>());
   // 보여짐/숨겨짐 상태
   const [visibility$] = useState(
     () => new BehaviorSubject<ModalVisibility>('HIDDEN')
   );
-  const [param, setParam] = useState<Param>();
-  const [visibility, setVisibility] = useState<ModalVisibility>(
-    visibility$.value
-  );
+  const [param, setParam] = useState<Param | null>(null);
+  const [hidingFinishedEvent$] = useState(() => new Subject<Event>());
+  const [hideCommand$] = useState(() => new Subject<Event>());
 
   useEffect(() => {
-    const subscription = visibility$.subscribe((value) => {
-      setVisibility(value);
-    });
-    return () => subscription.unsubscribe();
+    const subscription = hideCommand$
+      .pipe(
+        switchMap(() => {
+          setDesiredVisibility(false);
+          if (handleHide) {
+            return hidingFinishedEvent$.pipe(
+              first(),
+              tap(() => {
+                visibility$.next('HIDDEN');
+              })
+            );
+          } else {
+            visibility$.next('HIDDEN');
+            return EMPTY;
+          }
+        })
+      )
+      .subscribe();
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [handleHide, hideCommand$, hidingFinishedEvent$, visibility$]);
+
+  const hide = useCallback(() => {
+    hideCommand$.next(new Event());
+  }, [hideCommand$]);
+
+  const show = useCallback(() => {
+    setDesiredVisibility(true);
+    visibility$.next('SHOWN');
   }, [visibility$]);
 
   useImperativeHandle(
@@ -57,22 +83,19 @@ export const useModalViewModel = <
       // @ts-ignore
       show: (_param: Param) => {
         setParam(_param);
-        // 모달 표시 상태로 변경 시작
-        setDesiredVisibility(true);
-        visibility$.next('SHOWN');
+        show();
         // 모달 결과 Subject 에서
         return firstValueFrom(result$);
       },
     }),
-    [result$, visibility$]
+    [result$, show]
   );
 
   // 모달 종료 (승인)
   const confirm = useCallback<ModalConfirmFunction<Data>>(
     // @ts-ignore
     (data) => {
-      // 숨김 상태로 변경 시작
-      setDesiredVisibility(false);
+      hide();
       // 숨김 상태로 변경되면 result 발행
       visibility$
         .pipe(
@@ -87,13 +110,12 @@ export const useModalViewModel = <
           });
         });
     },
-    [result$, visibility$]
+    [hide, result$, visibility$]
   );
 
   // 모달 종료 (취소)
   const cancel = useCallback(() => {
-    // 숨김 상태로 변경 시작
-    setDesiredVisibility(false);
+    hide();
     // 숨김 상태로 변경되면 result 발행
     visibility$
       .pipe(
@@ -105,50 +127,20 @@ export const useModalViewModel = <
           type: ModalResultType.CANCEL,
         });
       });
-  }, [result$, visibility$]);
+  }, [hide, result$, visibility$]);
 
-  // 배경 클릭 핸들
-  const handleBackdropPress = useCallback(() => {
-    cancelOnBackdropPress && cancel();
-  }, [cancel, cancelOnBackdropPress]);
-
-  // 뒤로가기 버튼 클릭 핸들
-  const handleBackButtonPress = useCallback(() => {
-    cancelOnBackButtonPress && cancel();
-  }, [cancel, cancelOnBackButtonPress]);
-
-  // 모달 보여짐 이벤트 핸들
-  const handleModalShown = useCallback(() => {
-    visibility$.next('SHOWN');
-  }, [visibility$]);
-
-  // 모달 숨겨짐 이벤트 핸들
-  const handleModalHidden = useCallback(() => {
-    visibility$.next('HIDDEN');
-  }, [visibility$]);
+  const setHidingFinished = useCallback(() => {
+    hidingFinishedEvent$.next(new Event());
+  }, [hidingFinishedEvent$]);
 
   return useMemo(
     () => ({
       confirm,
       cancel,
-      desiredVisibility,
-      handleBackButtonPress,
-      handleBackdropPress,
-      handleModalShown,
-      handleModalHidden,
       param,
-      visibility,
+      setHidingFinished,
+      desiredVisibility,
     }),
-    [
-      confirm,
-      cancel,
-      desiredVisibility,
-      handleBackButtonPress,
-      handleBackdropPress,
-      handleModalShown,
-      handleModalHidden,
-      param,
-      visibility,
-    ]
+    [confirm, cancel, param, setHidingFinished, desiredVisibility]
   );
 };

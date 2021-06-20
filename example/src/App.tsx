@@ -10,6 +10,7 @@ import {SimpleModalExampleScreen} from './simple-modal-example';
 import {TextInputModalExampleScreen} from './text-input-modal-example';
 import {AlertModalExampleScreen} from './alert-modal-example';
 import {ShowModalContinuouslyExampleScreen} from './show-modal-continuously-example';
+import {ForwardedAlertModalExampleScreen} from './forwarded-alert-modal-example/forwarded-alert-modal-example-screen';
 
 type RootStackParamList = {
   SIMPLE_MODAL_EXAMPLE: undefined;
@@ -17,6 +18,7 @@ type RootStackParamList = {
   TEXT_INPUT_MODAL_EXAMPLE: undefined;
   ALERT_MODAL_EXAMPLE: undefined;
   SHOW_MODAL_CONTINUOUSLY_EXAMPLE: undefined;
+  FORWARDED_ALERT_MODAL_EXAMPLE: undefined;
 };
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
@@ -44,6 +46,10 @@ export default function App() {
           <Stack.Screen
             name={'SHOW_MODAL_CONTINUOUSLY_EXAMPLE'}
             component={ShowModalContinuouslyExampleScreen}
+          />
+          <Stack.Screen
+            name={'FORWARDED_ALERT_MODAL_EXAMPLE'}
+            component={ForwardedAlertModalExampleScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

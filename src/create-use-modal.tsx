@@ -2,6 +2,9 @@ import { createModal, CreateModalFunctionParam } from './create-modal';
 import { useModal } from './use-modal';
 import React from 'react';
 
+/**
+ * A function that creates a custom hook that returns an object with a modal display function.
+ */
 export const createUseModal = <
   Data extends unknown = void,
   Param extends unknown = void

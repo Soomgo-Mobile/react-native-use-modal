@@ -5,3 +5,4 @@ export * from './modal-result-type';
 export * from './create-use-modal';
 export * from './create-use-forwarded-modal';
 export * from './create-forwarded-modal';
+export * from './pre-config-create-use-modal';

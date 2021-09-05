@@ -34,6 +34,8 @@ The goal of `react-native-use-modal` is to make all the functions of `react-nati
   - [Handling the modal's result with value](#handling-the-modals-result-with-value)
   - [Customize modal config](#customize-modal-config)
   - [Make cancelable when press backdrop or back button](#make-cancelable-when-press-backdrop-or-back-button)
+  - [Creating a preconfigured createUseModal](#creating-a-preconfigured-createusemodal)
+  - [Making a third-party modal or an existing modal into a 'hook'](#making-a-third-party-modal-or-an-existing-modal-into-a-hook)
 - [Workflow example](#workflow-example)
 - [Contributing](#contributing)
 - [License](#license)
@@ -284,6 +286,18 @@ export const useSimpleModal = createUseModal(
   },
 );
 ```
+
+### Creating a preconfigured createUseModal
+You can use the `createCreateUseModal` function to create createUseModal with predefined options.
+For example, if you need to create several bottom sheet modal, you can use it in a way such as defining the modalOption value for creating a bottom sheet modal in advance.
+
+An example usage can be found at [create-use-bottom-sheet-modal.tsx](src/create-use-bottom-sheet-modal.tsx).
+
+### Making a third-party modal or an existing modal into a 'hook'
+Using `createUseForwardedModal`, You can make a normal modal (modal that receives the visible property as props) a 'hook'.
+It can be used when you want to make a modal component provided by the design component library into a 'hook' or to make an existing modal component into a 'hook' with minimal effort.
+
+An example usage can be found at [forwarded-alert-modal-example-screen.tsx](example/src/forwarded-alert-modal-example/forwarded-alert-modal-example-screen.tsx).
 
 ## Workflow example
 

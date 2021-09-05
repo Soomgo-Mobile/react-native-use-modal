@@ -18,6 +18,28 @@ The goal of `react-native-use-modal` is to make all the functions of `react-nati
 - No need to explicitly place modal at component tree
 - Fully customizable
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [Installation](#installation)
+  - [Place `ModalProvider` at your app's root component](#place-modalprovider-at-your-apps-root-component)
+- [Usage](#usage)
+  - [Declare modal as hook with `createUseModal`](#declare-modal-as-hook-with-createusemodal)
+  - [Show modal using hook](#show-modal-using-hook)
+  - [Handling the modal's result](#handling-the-modals-result)
+  - [Declare modal that require parameters](#declare-modal-that-require-parameters)
+  - [Show modal that require parameters](#show-modal-that-require-parameters)
+  - [Declare modal that return values](#declare-modal-that-return-values)
+  - [Handling the modal's result with value](#handling-the-modals-result-with-value)
+  - [Customize modal config](#customize-modal-config)
+  - [Make cancelable when press backdrop or back button](#make-cancelable-when-press-backdrop-or-back-button)
+- [Workflow example](#workflow-example)
+- [Contributing](#contributing)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Installation
 
 ```sh

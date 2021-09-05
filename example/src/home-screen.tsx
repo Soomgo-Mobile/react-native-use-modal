@@ -39,6 +39,12 @@ export const HomeScreen = () => {
             navigation.push('FORWARDED_ALERT_MODAL_EXAMPLE');
           }}
         />
+        <Button
+          title={'Bottom sheet modal'}
+          onPress={() => {
+            navigation.push('SIMPLE_BOTTOM_SHEET_MODAL_EXAMPLE');
+          }}
+        />
       </ScrollView>
     </View>
   );

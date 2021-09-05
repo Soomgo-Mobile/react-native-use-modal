@@ -11,6 +11,8 @@ import {TextInputModalExampleScreen} from './text-input-modal-example';
 import {AlertModalExampleScreen} from './alert-modal-example';
 import {ShowModalContinuouslyExampleScreen} from './show-modal-continuously-example';
 import {ForwardedAlertModalExampleScreen} from './forwarded-alert-modal-example/forwarded-alert-modal-example-screen';
+import {SimpleBottomSheetModalExampleScreen} from './simple-bottom-sheet-modal-example';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 type RootStackParamList = {
   SIMPLE_MODAL_EXAMPLE: undefined;
@@ -19,6 +21,7 @@ type RootStackParamList = {
   ALERT_MODAL_EXAMPLE: undefined;
   SHOW_MODAL_CONTINUOUSLY_EXAMPLE: undefined;
   FORWARDED_ALERT_MODAL_EXAMPLE: undefined;
+  SIMPLE_BOTTOM_SHEET_MODAL_EXAMPLE: undefined;
 };
 
 export type RootStackNavigationProp = StackNavigationProp<RootStackParamList>;
@@ -27,32 +30,38 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <ModalProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName={'HOME'}>
-          <Stack.Screen name={'HOME'} component={HomeScreen} />
-          <Stack.Screen
-            name={'SIMPLE_MODAL_EXAMPLE'}
-            component={SimpleModalExampleScreen}
-          />
-          <Stack.Screen
-            name={'TEXT_INPUT_MODAL_EXAMPLE'}
-            component={TextInputModalExampleScreen}
-          />
-          <Stack.Screen
-            name={'ALERT_MODAL_EXAMPLE'}
-            component={AlertModalExampleScreen}
-          />
-          <Stack.Screen
-            name={'SHOW_MODAL_CONTINUOUSLY_EXAMPLE'}
-            component={ShowModalContinuouslyExampleScreen}
-          />
-          <Stack.Screen
-            name={'FORWARDED_ALERT_MODAL_EXAMPLE'}
-            component={ForwardedAlertModalExampleScreen}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </ModalProvider>
+    <SafeAreaProvider>
+      <ModalProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName={'HOME'}>
+            <Stack.Screen name={'HOME'} component={HomeScreen} />
+            <Stack.Screen
+              name={'SIMPLE_MODAL_EXAMPLE'}
+              component={SimpleModalExampleScreen}
+            />
+            <Stack.Screen
+              name={'TEXT_INPUT_MODAL_EXAMPLE'}
+              component={TextInputModalExampleScreen}
+            />
+            <Stack.Screen
+              name={'ALERT_MODAL_EXAMPLE'}
+              component={AlertModalExampleScreen}
+            />
+            <Stack.Screen
+              name={'SHOW_MODAL_CONTINUOUSLY_EXAMPLE'}
+              component={ShowModalContinuouslyExampleScreen}
+            />
+            <Stack.Screen
+              name={'FORWARDED_ALERT_MODAL_EXAMPLE'}
+              component={ForwardedAlertModalExampleScreen}
+            />
+            <Stack.Screen
+              name={'SIMPLE_BOTTOM_SHEET_MODAL_EXAMPLE'}
+              component={SimpleBottomSheetModalExampleScreen}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ModalProvider>
+    </SafeAreaProvider>
   );
 }

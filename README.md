@@ -18,6 +18,30 @@ The goal of `react-native-use-modal` is to make all the functions of `react-nati
 - No need to explicitly place modal at component tree
 - Fully customizable
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [Installation](#installation)
+  - [Place `ModalProvider` at your app's root component](#place-modalprovider-at-your-apps-root-component)
+- [Usage](#usage)
+  - [Declare modal as hook with `createUseModal`](#declare-modal-as-hook-with-createusemodal)
+  - [Show modal using hook](#show-modal-using-hook)
+  - [Handling the modal's result](#handling-the-modals-result)
+  - [Declare modal that require parameters](#declare-modal-that-require-parameters)
+  - [Show modal that require parameters](#show-modal-that-require-parameters)
+  - [Declare modal that return values](#declare-modal-that-return-values)
+  - [Handling the modal's result with value](#handling-the-modals-result-with-value)
+  - [Customize modal config](#customize-modal-config)
+  - [Make cancelable when press backdrop or back button](#make-cancelable-when-press-backdrop-or-back-button)
+  - [Creating a preconfigured createUseModal](#creating-a-preconfigured-createusemodal)
+  - [Making a third-party modal or an existing modal into a 'hook'](#making-a-third-party-modal-or-an-existing-modal-into-a-hook)
+- [Workflow example](#workflow-example)
+- [Contributing](#contributing)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Installation
 
 ```sh
@@ -262,6 +286,18 @@ export const useSimpleModal = createUseModal(
   },
 );
 ```
+
+### Creating a preconfigured createUseModal
+You can use the `createCreateUseModal` function to create createUseModal with predefined options.
+For example, if you need to create several bottom sheet modal, you can use it in a way such as defining the modalOption value for creating a bottom sheet modal in advance.
+
+An example usage can be found at [create-use-bottom-sheet-modal.tsx](src/create-use-bottom-sheet-modal.tsx).
+
+### Making a third-party modal or an existing modal into a 'hook'
+Using `createUseForwardedModal`, You can make a normal modal (modal that receives the visible property as props) a 'hook'.
+It can be used when you want to make a modal component provided by the design component library into a 'hook' or to make an existing modal component into a 'hook' with minimal effort.
+
+An example usage can be found at [forwarded-alert-modal-example-screen.tsx](example/src/forwarded-alert-modal-example/forwarded-alert-modal-example-screen.tsx).
 
 ## Workflow example
 

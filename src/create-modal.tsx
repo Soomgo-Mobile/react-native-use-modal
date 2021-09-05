@@ -6,6 +6,12 @@ import { useModalViewModel } from './use-modal-view-model';
 import { StyleSheet } from 'react-native';
 import type { ModalInstance } from './modal-instance';
 
+export type CreateModalOption = {
+  cancelOnBackdropPress?: boolean; // 배경 클릭시 취소 여부
+  cancelOnBackButtonPress?: boolean; // 뒤로가기 버튼 클릭시 취소 여부
+  modalProps?: Omit<Partial<ModalProps>, 'isVisible'>;
+};
+
 export type CreateModalFunctionParam<
   Data extends unknown = void, // 모달 결과로 받을 값의 타입
   Param extends unknown = void
@@ -16,11 +22,7 @@ export type CreateModalFunctionParam<
     cancel: () => void; // 모달 종료 함수 (취소)
     param: Param;
   }>,
-  option?: {
-    cancelOnBackdropPress?: boolean; // 배경 클릭시 취소 여부
-    cancelOnBackButtonPress?: boolean; // 뒤로가기 버튼 클릭시 취소 여부
-    modalProps?: Omit<Partial<ModalProps>, 'isVisible'>;
-  }
+  option?: CreateModalOption
 ];
 
 /**

@@ -1,9 +1,9 @@
-import { preConfigCreateUseModal } from './pre-config-create-use-modal';
+import { createCreateUseModal } from './create-create-use-modal';
 
 /**
  * Modal hook creation function with default set to BottomSheet style
  */
-export const createUseNotificationModal = preConfigCreateUseModal({
+export const createUseNotificationModal = createCreateUseModal({
   modalProps: {
     style: {
       margin: 0,

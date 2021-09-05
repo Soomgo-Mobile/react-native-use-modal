@@ -1,9 +1,9 @@
-import { preConfigCreateUseModal } from './pre-config-create-use-modal';
+import { createCreateUseModal } from './create-create-use-modal';
 
 /**
  * Modal hook creation function with default set to BottomSheet style
  */
-export const createUseBottomSheetModal = preConfigCreateUseModal({
+export const createUseBottomSheetModal = createCreateUseModal({
   modalProps: {
     style: {
       margin: 0,
@@ -13,4 +13,6 @@ export const createUseBottomSheetModal = preConfigCreateUseModal({
     animationIn: 'slideInUp',
     animationOut: 'slideOutDown',
   },
+  cancelOnBackButtonPress: true,
+  cancelOnBackdropPress: true,
 });

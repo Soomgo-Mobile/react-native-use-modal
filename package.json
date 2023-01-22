@@ -155,7 +155,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "react-native-modal": "^11.10.0",
+    "react-native-modal": "^13.0.1",
     "rxjs": "^7.1.0"
   }
 }

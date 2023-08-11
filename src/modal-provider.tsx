@@ -1,8 +1,15 @@
-import React, { ContextType, useMemo, useState } from 'react';
+import React, {
+  ContextType,
+  PropsWithChildren,
+  useMemo,
+  useState,
+} from 'react';
 import { ModalContext } from './modal-context';
 import { View } from 'react-native';
 
-export const ModalProvider: React.FC = ({ children }) => {
+export const ModalProvider: React.FC<PropsWithChildren<{}>> = ({
+  children,
+}) => {
   const [modalMap, setModalMap] = useState<Map<string, React.ReactNode>>(
     new Map()
   );
